@@ -20,19 +20,19 @@ measures.
 ## Why?
 
 Most psychological analyses of ESM data focus on **means, variances, and
-linear relationships** — asking, for example, how a person’s average
+linear relationships** - asking, for example, how a person’s average
 mood or its day-to-day variability predicts wellbeing. These summaries
 are informative, but they discard the *order* of observations and
 therefore miss the temporal structure of the signal. Nonlinear dynamics
 takes a different stance: rather than summarising what a participant
-*is*, it asks **how a participant moves** — how its states evolve,
+*is*, it asks **how a participant moves** - how its states evolve,
 recur, and diverge over time. Complexity science formalises this by
 reconstructing the participant’s underlying *attractor* (its habitual
 trajectory through state space) and quantifying its geometry. A highly
 regular, periodic attractor yields low entropy and high determinism; a
 random, diffuse one yields the opposite. Between these extremes, healthy
 psychological functioning is thought to occupy a region of **bounded
-complexity** — flexible enough to adapt to context, yet structured
+complexity** - flexible enough to adapt to context, yet structured
 enough to remain coherent. These properties are invisible to
 variance-based summaries but captured naturally by measures such as
 **multivariate sample entropy** (predictability of state-space
@@ -59,7 +59,7 @@ library(experdyn)
 A typical ESM dataset has a timestamp column per observation, one column
 identifying the participant, and one or more psychological variables.
 **Any numeric column other than the timestamp and participant identifier
-is treated as a variable** — no specific naming convention is required.
+is treated as a variable** - no specific naming convention is required.
 
 ``` r
 set.seed(42)
@@ -122,9 +122,9 @@ resampled$plot
 
 ## State-Space Embedding
 
-Before building the state-space, choose the time delay *τ* (via Average
-Mutual Information) and embedding dimension *m* (via False Nearest
-Neighbours) for each variable.
+Before building the state-space, choose the time delay $\tau$ (via
+Average Mutual Information) and embedding dimension $m$ (via False
+Nearest Neighbours) for each variable.
 
 ``` r
 params <- estimate_embedding_parameters(resampled, plot = TRUE)
@@ -226,13 +226,13 @@ mse
 RQA characterises how often and how consistently the system revisits
 previous states. Key measures:
 
-- **RR** — Recurrence Rate: overall density of recurrences.
-- **DET** — Determinism: proportion of recurrences on diagonal lines
+- **RR** - Recurrence Rate: overall density of recurrences.
+- **DET** - Determinism: proportion of recurrences on diagonal lines
   (periodic / predictable structure).
-- **L** / **Lmax** — Mean / maximum diagonal line length.
-- **ENTR** — Shannon entropy of diagonal line lengths (structural
+- **L** / **Lmax** - Mean / maximum diagonal line length.
+- **ENTR** - Shannon entropy of diagonal line lengths (structural
   richness).
-- **LAM** / **TT** — Laminarity and Trapping Time (intermittent, laminar
+- **LAM** / **TT** - Laminarity and Trapping Time (intermittent, laminar
   episodes).
 
 ``` r
@@ -280,34 +280,34 @@ Issues](https://github.com/RealityBending/experdyn/issues).
 
 ### New complexity measures
 
-- **Multiscale Sample Entropy (MSE)** — apply SampEn at multiple
+- **Multiscale Sample Entropy (MSE)** - apply SampEn at multiple
   coarse-graining scales to capture complexity across timescales, as
   introduced by Costa et al. (2002).
-- **Permutation Entropy** — ordinal-pattern based entropy;
+- **Permutation Entropy** - ordinal-pattern based entropy;
   computationally lightweight and robust to noise, useful as a
   complement or sanity-check to MvSampEn.
-- **Detrended Fluctuation Analysis (DFA)** — estimate long-range
+- **Detrended Fluctuation Analysis (DFA)** - estimate long-range
   temporal correlations and fractal scaling exponents, relevant for
   distinguishing 1/f noise from white noise in ESM data.
-- **Correlation Dimension (D2)** — estimate the fractal dimension of the
+- **Correlation Dimension (D2)** - estimate the fractal dimension of the
   reconstructed attractor via the Grassberger–Procaccia algorithm.
-- **Lyapunov Exponent** — quantify the rate of divergence of nearby
+- **Lyapunov Exponent** - quantify the rate of divergence of nearby
   trajectories as a direct measure of chaotic dynamics.
 
 ### Temporal dynamics within participants
 
-- **Windowed / rolling RQA and entropy** — slide a fixed-width window
+- **Windowed / rolling RQA and entropy** - slide a fixed-width window
   across each subseries to produce time-varying complexity trajectories,
   enabling study of intra-individual change across the day or week.
-- **Change-point detection** — identify structural transitions in the
+- **Change-point detection** - identify structural transitions in the
   attractor based on rolling RQA measures (e.g., sudden drop in DET
   indicating a phase transition).
 
 ### Performance and scalability
 
-- **Rcpp acceleration for RQA and MvSampEn** — replace the pure-R O(n²)
+- **Rcpp acceleration for RQA and MvSampEn** - replace the pure-R O(n²)
   distance loops with compiled C++ routines via `Rcpp`, enabling routine
   use on longer series (n \> 300).
-- **Sparse / chunked distance matrix** — avoid materialising the full
+- **Sparse / chunked distance matrix** - avoid materialising the full
   n×n distance matrix; enumerate recurrences on-the-fly using spatial
   indexing (e.g., k-d trees).
