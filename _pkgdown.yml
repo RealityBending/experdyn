@@ -21,10 +21,32 @@ reference:
       desc: "Regularise and clean raw ESM time series."
       contents:
           - resample_timeseries
+    - title: "Embedding"
+      desc: "Reconstruct the attractor via Takens delay-embedding."
+      contents:
+          - estimate_embedding_parameters
+          - make_statespace
+    - title: "Complexity measures"
+      desc: "Quantify the complexity and recurrence structure of state-space trajectories."
+      contents:
+          - compute_mvsampen
+          - compute_rqa
+    - title: "Visualisation"
+      desc: "Plot state-space attractors and recurrence plots."
+      contents:
+          - plot_statespace
+          - plot_rqa
+    - title: "Print methods"
+      desc: "S3 print methods for experdyn objects."
+      contents:
+          - starts_with("print.")
     - title: "Internal helpers"
       desc: "Not exported; documented for contributors."
       contents:
-          - dot-safe_spline
+          - matches("^\\.")
+    - title: "Package"
+      contents:
+          - experdyn-package
 
 news:
     releases:
