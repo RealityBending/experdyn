@@ -17,6 +17,30 @@ of psychological states (mood, arousal, stress, …). **experdyn** offers
 a complete pipeline from raw timestamps to interpretable nonlinear
 measures.
 
+## Why?
+
+Most psychological analyses of ESM data focus on **means, variances, and
+linear relationships** — asking, for example, how a person’s average
+mood or its day-to-day variability predicts wellbeing. These summaries
+are informative, but they discard the *order* of observations and
+therefore miss the temporal structure of the signal. Nonlinear dynamics
+takes a different stance: rather than summarising what a participant
+*is*, it asks **how a participant moves** — how its states evolve,
+recur, and diverge over time. Complexity science formalises this by
+reconstructing the participant’s underlying *attractor* (its habitual
+trajectory through state space) and quantifying its geometry. A highly
+regular, periodic attractor yields low entropy and high determinism; a
+random, diffuse one yields the opposite. Between these extremes, healthy
+psychological functioning is thought to occupy a region of **bounded
+complexity** — flexible enough to adapt to context, yet structured
+enough to remain coherent. These properties are invisible to
+variance-based summaries but captured naturally by measures such as
+**multivariate sample entropy** (predictability of state-space
+trajectories) and **recurrence quantification analysis** (how often and
+in what patterns the participant revisits previous states). The result
+is a richer portrait of intra-individual dynamics that complements,
+rather than replaces, conventional approaches.
+
 ## Installation
 
 Install the development version from GitHub:
@@ -39,24 +63,24 @@ is treated as a variable** — no specific naming convention is required.
 
 ``` r
 set.seed(42)
-n_per <- 40   # observations per participant
+n_per <- 40 # observations per participant
 
 make_participant <- function(id, t0, seed) {
-  set.seed(seed)
-  times <- t0 + cumsum(sample(c(3600, 5400, 7200), n_per, replace = TRUE))
-  data.frame(
-    Participant = id,
-    timestamp   = times,
-    Valence  = cumsum(rnorm(n_per, sd = 0.6)),
-    Arousal  = cumsum(rnorm(n_per, sd = 0.4))
-  )
+    set.seed(seed)
+    times <- t0 + cumsum(sample(c(3600, 5400, 7200), n_per, replace = TRUE))
+    data.frame(
+        Participant = id,
+        timestamp = times,
+        Valence = cumsum(rnorm(n_per, sd = 0.6)),
+        Arousal = cumsum(rnorm(n_per, sd = 0.4))
+    )
 }
 
 esm_data <- rbind(
-  make_participant("P01", as.POSIXct("2025-06-01 09:00:00"), seed = 1),
-  make_participant("P02", as.POSIXct("2025-06-01 09:15:00"), seed = 2),
-  make_participant("P03", as.POSIXct("2025-06-01 08:45:00"), seed = 3),
-  make_participant("P04", as.POSIXct("2025-06-01 08:45:00"), seed = 4)
+    make_participant("P01", as.POSIXct("2025-06-01 09:00:00"), seed = 1),
+    make_participant("P02", as.POSIXct("2025-06-01 09:15:00"), seed = 2),
+    make_participant("P03", as.POSIXct("2025-06-01 08:45:00"), seed = 3),
+    make_participant("P04", as.POSIXct("2025-06-01 08:45:00"), seed = 4)
 )
 
 head(esm_data)
@@ -78,11 +102,11 @@ using natural cubic splines (linear interpolation is also available).
 
 ``` r
 resampled <- resample_timeseries(
-  esm_data,
-  time_col        = "timestamp",
-  participant_col = "Participant",
-  target_frequency = 60,
-  verbose         = TRUE
+    esm_data,
+    time_col = "timestamp",
+    participant_col = "Participant",
+    target_frequency = 60,
+    verbose = TRUE
 )
 #> --- Preprocessing Complete ---
 #> Original data points    : 160
@@ -141,9 +165,9 @@ randomness in the parameter estimation step.
 
 ``` r
 ss <- make_statespace(
-  resampled,
-  delay      = 1,
-  dimensions = 2
+    resampled,
+    delay      = 1,
+    dimensions = 2
 )
 ss
 #> ========= Multivariate State Space =========
