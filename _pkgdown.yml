@@ -1,0 +1,32 @@
+home:
+    strip_header: true # README already has the package name as h1
+
+url: https://dominiquemakowski.github.io/experdyn/
+
+template:
+    bootstrap: 5
+    bootswatch: flatly
+
+navbar:
+    structure:
+        left: [intro, reference, articles, news]
+        right: [search, github]
+    components:
+        github:
+            icon: fab fa-github
+            href: https://github.com/RealityBending/experdyn
+
+reference:
+    - title: "Preprocessing"
+      desc: "Regularise and clean raw ESM time series."
+      contents:
+          - resample_timeseries
+    - title: "Internal helpers"
+      desc: "Not exported; documented for contributors."
+      contents:
+          - dot-safe_spline
+
+news:
+    releases:
+        - text: "Version 0.1.0"
+          href: news/index.html

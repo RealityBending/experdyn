@@ -1,0 +1,29 @@
+Package: experdyn
+Title: Experiential Dynamics: Nonlinear Time Series Analysis for Experience Sampling Data
+Version: 0.1.0
+Authors@R:
+    person("Dominique", "Makowski", email = "D.Makowski@sussex.ac.uk", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-5375-9967"))
+Description: Provides tools for preprocessing and analysing behavioral time series
+    collected via Experience Sampling Method (ESM) paradigms. The package
+    implements nonlinear dynamics and complexity measures — including entropy,
+    fractal dimensions, and state-space embeddings — to characterise the temporal
+    structure of psychological and behavioral data from repeated-measures,
+    ecological momentary assessment designs.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports:
+    dplyr,
+    ggplot2,
+    nonlinearTseries,
+    tidyr
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    uwot
+Config/testthat/edition: 3
+URL: https://github.com/RealityBending/experdyn, https://dominiquemakowski.github.io/experdyn/
+BugReports: https://github.com/RealityBending/experdyn/issues

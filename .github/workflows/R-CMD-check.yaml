@@ -1,0 +1,58 @@
+# Workflow: run R CMD check on macOS, Windows, and Ubuntu
+# Triggers on every push/pull-request to main.
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+name: R-CMD-check
+
+permissions:
+    contents: read
+
+jobs:
+    R-CMD-check:
+        runs-on: ${{ matrix.config.os }}
+
+        name: ${{ matrix.config.os }} (R ${{ matrix.config.r }})
+
+        strategy:
+            fail-fast: false
+            matrix:
+                config:
+                    - { os: ubuntu-latest, r: "release" }
+                    - { os: windows-latest, r: "release" }
+                    - { os: macOS-latest, r: "release" }
+                    - { os: ubuntu-latest, r: "devel", http-user-agent: "release" }
+
+        env:
+            GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+            R_KEEP_PKG_SOURCE: yes
+
+        steps:
+            # ── 1. Checkout ────────────────────────────────────────────────────────
+            - uses: actions/checkout@v4
+
+            # ── 2. Install Pandoc ──────────────────────────────────────────────────
+            - uses: r-lib/actions/setup-pandoc@v2
+
+            # ── 3. Install R ───────────────────────────────────────────────────────
+            - uses: r-lib/actions/setup-r@v2
+              with:
+                  r-version: ${{ matrix.config.r }}
+                  http-user-agent: ${{ matrix.config.http-user-agent }}
+                  use-public-rspm: true
+
+            # ── 4. Install package dependencies ───────────────────────────────────
+            - uses: r-lib/actions/setup-r-dependencies@v2
+              with:
+                  extra-packages: any::rcmdcheck
+                  needs: check
+
+            # ── 5. Run R CMD check ─────────────────────────────────────────────────
+            - uses: r-lib/actions/check-r-package@v2
+              with:
+                  upload-snapshots: true
+                  build_args: 'c("--no-manual", "--compact-vignettes=gs+qpdf")'

@@ -1,0 +1,26 @@
+# R artifacts
+.Rhistory
+.RData
+.Rproj.user/
+.Ruserdata
+*.Rproj
+
+# R package build artifacts
+*.tar.gz
+*.zip
+src/*.o
+src/*.so
+src/*.dll
+
+# devtools / roxygen / pkgdown
+man/figures/
+docs/
+
+# Rcheck
+*.Rcheck/
+
+# Compiled translations
+inst/doc/
+
+# Exploratory / scratch
+exploratory/
