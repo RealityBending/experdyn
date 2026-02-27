@@ -14,41 +14,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-# experdyn <img src="man/figures/logo.png" align="right" height="139" alt="" />
+# experdyn <img src="man/figures/logo.png" align="right" height="180" alt="" />
 
 [![R-CMD-check](https://github.com/RealityBending/experdyn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RealityBending/experdyn/actions/workflows/R-CMD-check.yaml)
 [![pkgdown](https://github.com/RealityBending/experdyn/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/RealityBending/experdyn/actions/workflows/pkgdown.yaml)
 
-**experdyn** provides tools for analysing ESM/EMA (Experience Sampling Method /
-Ecological Momentary Assessment) time series through the lens of **nonlinear
-dynamics and complexity science**.
+**experdyn** provides tools for analysing ESM/EMA (Experience Sampling Method / Ecological Momentary Assessment) time series through the lens of **nonlinear dynamics and complexity science**.
 
-Participants in ESM studies answer repeated short questionnaires throughout the
-day, producing irregularly-timed multivariate time series of psychological
-states (mood, arousal, stress, ...). **experdyn** offers a complete pipeline from
-raw timestamps to interpretable nonlinear measures.
+Participants in ESM studies answer repeated short questionnaires throughout the day, producing irregularly-timed multivariate time series of psychological states (mood, arousal, stress, ...). **experdyn** offers a complete pipeline from raw timestamps to interpretable nonlinear measures.
 
 ## Why?
 
-Most psychological analyses of ESM data focus on **means, variances, and linear
-relationships** — asking, for example, how a person's average mood or its
-day-to-day variability predicts wellbeing. These summaries are informative, but
-they discard the *order* of observations and therefore miss the temporal
-structure of the signal. Nonlinear dynamics takes a different stance: rather
-than summarising what a participant *is*, it asks **how a participant moves** — how its
-states evolve, recur, and diverge over time. Complexity science formalises this
-by reconstructing the participant's underlying *attractor* (its habitual trajectory
-through state space) and quantifying its geometry. A highly regular, periodic
-attractor yields low entropy and high determinism; a random, diffuse one yields
-the opposite. Between these extremes, healthy psychological functioning is
-thought to occupy a region of **bounded complexity** — flexible enough to adapt
-to context, yet structured enough to remain coherent. These properties are
-invisible to variance-based summaries but captured naturally by measures such as
-**multivariate sample entropy** (predictability of state-space trajectories) and
-**recurrence quantification analysis** (how often and in what patterns the
-participant revisits previous states). The result is a richer portrait of
-intra-individual dynamics that complements, rather than replaces, conventional
-approaches.
+Most psychological analyses of ESM data focus on **means, variances, and linear relationships** — asking, for example, how a person's average mood or its day-to-day variability predicts wellbeing. These summaries are informative, but they discard the *order* of observations and therefore miss the temporal structure of the signal. Nonlinear dynamics takes a different stance: rather than summarising what a participant *is*, it asks **how a participant moves** — how its states evolve, recur, and diverge over time. Complexity science formalises this by reconstructing the participant's underlying *attractor* (its habitual trajectory through state space) and quantifying its geometry. A highly regular, periodic attractor yields low entropy and high determinism; a random, diffuse one yields the opposite. Between these extremes, healthy psychological functioning is thought to occupy a region of **bounded complexity** — flexible enough to adapt to context, yet structured enough to remain coherent. These properties are invisible to variance-based summaries but captured naturally by measures such as **multivariate sample entropy** (predictability of state-space trajectories) and **recurrence quantification analysis** (how often and in what patterns the participant revisits previous states). The result is a richer portrait of intra-individual dynamics that complements, rather than replaces, conventional approaches.
 
 ## Installation
 
@@ -65,10 +42,7 @@ library(experdyn)
 
 ## Example data
 
-A typical ESM dataset has a timestamp column per observation, one column
-identifying the participant, and one or more psychological variables. **Any
-numeric column other than the timestamp and participant identifier is treated
-as a variable** — no specific naming convention is required.
+A typical ESM dataset has a timestamp column per observation, one column identifying the participant, and one or more psychological variables. **Any numeric column other than the timestamp and participant identifier is treated as a variable** — no specific naming convention is required.
 
 ```{r data}
 set.seed(42)

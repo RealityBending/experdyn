@@ -2,7 +2,7 @@
 
 <!-- README.md is generated from README.qmd. Please edit README.qmd, not README.md. -->
 
-# experdyn <img src="man/figures/logo.png" align="right" height="139" alt="" />
+# experdyn <img src="man/figures/logo.png" align="right" height="180" alt="" />
 
 [![R-CMD-check](https://github.com/RealityBending/experdyn/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RealityBending/experdyn/actions/workflows/R-CMD-check.yaml)
 [![pkgdown](https://github.com/RealityBending/experdyn/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/RealityBending/experdyn/actions/workflows/pkgdown.yaml)

@@ -37,16 +37,20 @@ jobs:
                       any::knitr
                   needs: website
 
-            # ── 5. Render README.qmd → README.md ───────────────────────────────────
+            # ── 5. Install experdyn ────────────────────────────────────────────────
+            - name: Install experdyn
+              run: Rscript -e 'devtools::install(".", dependencies = TRUE)'
+
+            # ── 6. Render README.qmd → README.md ───────────────────────────────────
             - name: Render README
               run: quarto render README.qmd --to gfm --output README.md
 
-            # ── 6. Build pkgdown site ──────────────────────────────────────────────
+            # ── 7. Build pkgdown site ──────────────────────────────────────────────
             - name: Build pkgdown site
               run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
               shell: Rscript {0}
 
-            # ── 7. Deploy to gh-pages branch ──────────────────────────────────────
+            # ── 8. Deploy to gh-pages branch ──────────────────────────────────────
             - name: Deploy to GitHub Pages
               uses: JamesIves/github-pages-deploy-action@v4
               with:
